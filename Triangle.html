@@ -26,7 +26,7 @@ const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.inner
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
-camera.position.z = 5; // keep this, the scene and camera code
+camera.position.z = 5; // the scene and camera code
 // triangle code 
 const points = [];
 points.push( new THREE.Vector3( 0, 1, 0 ) );
@@ -41,6 +41,7 @@ function animate() {
   renderer.render( scene, camera );
 }
 renderer.setAnimationLoop( animate );
+
 
 
   </script>

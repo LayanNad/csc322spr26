@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> the Washington Monument,</title>
+
+  <style>
+    
+  </style>
+
+  
+</head>
+<body>
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+
+  <script>
+    const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize( window.innerWidth, window.innerHeight );
+document.body.appendChild( renderer.domElement );
+
+camera.position.set(0,300,600);
+camera.lookAt( 0,250,0);
+
+const BaseWidth = 55;
+const LeftSide = -27.5;
+const RightSide = 27.5;
+const TopWidth = 34;
+const TopWidth1 = 17; 
+const TopWidth2 = -17; 
+const topPyramid = 55;
+const TotalHeight = 555;
+const vertices = new Float32Array ([
+  // ( x,y,z), x horizontal, y depth forward and back and z vertical up and down
+  LeftSide, 0, LeftSide,      
+  RightSide, 0, LeftSide,
+  RightSide, 0, RightSide,
+  LeftSide, 0,RightSide,
+
+  TopWidth2, 500, TopWidth2,
+  TopWidth1, 500, TopWidth2, 
+  TopWidth1, 500, TopWidth1,
+  TopWidth2, 500, TopWidth1,
+
+  // topPyramid
+  0,555,0
+]);
+const indices =[
+// 0 to 3, are the four corners of the bottom sequare
+//4 to 7, are four corners of the  top of the tower 
+// 8 is the top of the pyramid 
+0,1,5,  0,5,4,
+1,2,6,  1,6,5,
+2,3,7,   2,7,6,
+3,0,4,   3,4,7,
+// commecting it to the pyramis
+4,5,8,
+5,6,8,
+6,7,8,
+7,4,8
+];
+const geometry = new THREE.BufferGeometry();
+geometry.setAttribute( 'position', new THREE.BufferAttribute(vertices, 3 ) );
+geometry.setIndex(indices);
+
+const material = new THREE.MeshBasicMaterial({ color: 0xFFFFFF }); // the color white
+const mesh = new THREE.Mesh( geometry, material );
+scene.add(mesh);
+function animate() {
+  mesh.rotation.y += 0.01;
+  renderer.render( scene, camera );
+}
+renderer.setAnimationLoop( animate );
+
+  </script>
+</body>
+</html>
